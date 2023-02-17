@@ -1,0 +1,31 @@
+{
+	"name": "helpdesk",
+	"version": "1.0.0",
+	"description": "A bot for setting up a helpdesk in your server.",
+	"main": "src/index.ts",
+	"scripts": {
+		"start": "ts-node src/index.ts",
+		"dev": "nodemon src/index.ts",
+		"dist": "node dist/index.js",
+		"clean": "node clean.js"
+	},
+	"keywords": [],
+	"author": "NorteX",
+	"license": "ISC",
+	"devDependencies": {
+		"@types/js-yaml": "^4.0.5",
+		"@types/node": "^18.11.18",
+		"nodemon": "^2.0.15",
+		"prettier": "^2.8.1",
+		"ts-node": "^10.9.1",
+		"typescript": "^4.9.4"
+	},
+	"dependencies": {
+		"@nortex/handler": "^7.3.1",
+		"chalk": "^4.1.2",
+		"discord.js": "^14.7.1",
+		"fuse.js": "^6.5.3",
+		"js-yaml": "^4.1.0",
+		"moment": "^2.29.4"
+	}
+}
