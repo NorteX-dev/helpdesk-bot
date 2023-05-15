@@ -1,7 +1,7 @@
 import { Category, Command, Description, Name } from "@nortex/handler";
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ChatInputCommandInteraction, EmbedBuilder } from "discord.js";
 
-@Name("create")
+@Name("helpdesk")
 @Description("Create the help desk.")
 @Category("Helpdesk")
 export default class extends Command {
@@ -25,14 +25,14 @@ export default class extends Command {
 
 		const desc = this.client.config.questions
 			.map(({ question }: { question: string }, idx: number) => {
-				return `${this.emojis[idx]} ${question}`;
+				return `**[${this.emojis[idx]}]** ${question}`;
 			})
 			.join("\n");
 
 		const embed = new EmbedBuilder();
 		embed.setAuthor({
 			name: this.client.config.embed_content.title,
-			iconURL: this.client.user.displayAvatarURL({ size: "2048", dynamic: false, format: "png" }),
+			iconURL: this.client.user.displayAvatarURL(),
 		});
 		embed.setTimestamp();
 		embed.setColor(parseInt(this.client.config.embed_content.color, 16));
@@ -41,6 +41,11 @@ export default class extends Command {
 		}
 		embed.setDescription(desc);
 		embed.setFooter({ text: interaction.guild.name });
+		// embed.addFields(
+		// 	this.client.config.questions.map(({ question }: { question: string }, idx: number) => {
+		// 		return { name: `**${this.emojis[idx]}:**`, value: `${question}`, inline: true };
+		// 	})
+		// );
 
 		let rows = [];
 		for (let rowOffset = 0; rowOffset < this.client.config.questions.length; rowOffset += 5) {

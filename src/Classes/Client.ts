@@ -1,6 +1,5 @@
 import { Client as DJSClient, GatewayIntentBits, Partials } from "discord.js";
 import { CommandHandler, ComponentHandler, EventHandler } from "@nortex/handler";
-import Embed from "./Embed";
 import Logger from "./Logger";
 import * as path from "path";
 import { Config } from "../Const/configValidator";
@@ -12,7 +11,6 @@ export default class Client extends DJSClient {
 	initDate: number;
 	commandHandler!: CommandHandler;
 	componentHandler!: ComponentHandler;
-	embed!: Embed;
 
 	constructor(config: Config) {
 		super({
@@ -24,20 +22,15 @@ export default class Client extends DJSClient {
 
 		this.initDate = Date.now();
 
-		this.init().then(() => () => {
-			Logger.startup("Client initialized.");
-		});
+		Logger.startup("Client initialized.");
+		this.createHandlers();
+		this.run();
 	}
 
 	createHandlers() {
 		this.commandHandler = this.createInteractionHandler();
 		this.componentHandler = this.createComponentHandler();
 		this.createEventHandler();
-	}
-
-	async init() {
-		this.embed = new Embed(this);
-		this.run();
 	}
 
 	async run() {
@@ -53,7 +46,7 @@ export default class Client extends DJSClient {
 			client: this,
 			directory: path.join(__dirname, "../Commands"),
 		});
-		handler.on("load", (inter) => Logger.startup(`Slash command loaded: ${inter.name}`));
+		handler.on("load", (int) => Logger.startup(`Slash command loaded: ${int.name}`));
 		return handler;
 	}
 
@@ -62,7 +55,7 @@ export default class Client extends DJSClient {
 			client: this,
 			directory: path.join(__dirname, "../Events"),
 		});
-		handler.on("load", (ev) => Logger.startup(`Event loaded: ${ev.name}`));
+		handler.on("load", (evt) => Logger.startup(`Event loaded: ${evt.name}`));
 		return handler;
 	}
 
@@ -71,7 +64,7 @@ export default class Client extends DJSClient {
 			client: this,
 			directory: path.join(__dirname, "../Components"),
 		});
-		handler.on("load", (com) => Logger.startup(`Component loaded: ${com.customId}`));
+		handler.on("load", (cmp) => Logger.startup(`Component loaded: ${cmp.customId}`));
 		return handler;
 	}
 }

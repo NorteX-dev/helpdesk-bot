@@ -9,15 +9,17 @@ export default class extends Event {
 		let message = `The bot is ready in ${Date.now() - this.client.initDate}ms as ${this.client.user?.tag}.`;
 		Logger.startup(message);
 
-		this.client.user.setPresence({
-			status: "idle",
-			activities: [
-				{
-					name: this.client.config.status,
-					type: ActivityType.Watching,
-				},
-			],
-		});
+		if (this.client.config.status) {
+			this.client.user.setPresence({
+				status: "idle",
+				activities: [
+					{
+						name: this.client.config.status,
+						type: ActivityType.Watching,
+					},
+				],
+			});
+		}
 
 		this.updateCommands();
 	}

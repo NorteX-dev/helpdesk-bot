@@ -10,8 +10,6 @@ const configSchema = z.object({
 	status: z.string().optional(),
 	owners: z.array(z.string()),
 	log_channel_id: z.string().optional(),
-	assistance_channel_id: z.string().optional(),
-	assistance_role_id: z.string().optional(),
 	embed_content: z.object({
 		title: z.string(),
 		color: z.string().refine((color) => !isNaN(parseInt(color, 16)), { message: "The color property is not a valid hex color. It cannot contain a #." }),

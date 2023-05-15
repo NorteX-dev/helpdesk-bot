@@ -8,9 +8,9 @@
 
 # This is the token for your discord bot. It is required.
 # You can get it from the Discord Developer Portal @ https://discord.com/developers/applications/.
-token: "YOUR DISCORD BOT TOKEN"
+token: "ODYyNDExODMxMTMzOTk1MDI5.GfQDyc.Gw6AEjhCOfHtgXhZ1Md19FvceI8O126Hrservk"
 # This is the text for the bot's status. You can leave this empty ("") or remove this key in its entirety if you do not want status.
-status: "Support"
+status: ""
 # This is a list of the IDs of the users who can use the bot.
 # You can get a your/any user's ID by enabling developer mode in Discord and right clicking on your/their name.
 owners:
@@ -18,10 +18,7 @@ owners:
   - "180280668239036416"
 # The ID of the channel where button press logs will be sent.
 # Optional - leave empty ("") to disable.
-log_channel_id: "810594298021543965"
-# The channel & role IDs for support.
-assistance_channel_id: "810594298021543965"
-assistance_role_id: "810594298021543965"
+log_channel_id: "923189263569403925"
 # Configuration for the embed generated upon running /create.
 embed_content:
   # The title of the embed.
@@ -41,3 +38,19 @@ questions:
     response: "Response 1"
   - question: "Question 2"
     response: "Response 2"
+  - question: "Question 3"
+    response: "Response 3"
+  - question: "Question 4"
+    response: "Response 4"
+  - question: "Question 5"
+    response: "Response 5"
+  - question: "Question 6"
+    response: "Response 6"
+  - question: "Question 7"
+    response: "Response 7"
+  - question: "Question 8"
+    response: "Response 8"
+  - question: "Question 9"
+    response: "Response 9"
+  - question: "Question 10"
+    response: "Response 10"

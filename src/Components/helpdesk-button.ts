@@ -29,7 +29,7 @@ export default class extends Component {
 		const embed = new EmbedBuilder();
 		embed.setAuthor({
 			name: this.client.config.embed_content.title,
-			iconURL: this.client.user.displayAvatarURL({ size: "2048", dynamic: false, format: "png" }),
+			iconURL: this.client.user.displayAvatarURL(),
 		});
 		embed.setTimestamp();
 		embed.setColor(parseInt(this.client.config.embed_content.color, 16));

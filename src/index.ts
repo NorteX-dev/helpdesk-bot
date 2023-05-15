@@ -1,51 +1,34 @@
 import { ButtonInteraction, ModalSubmitInteraction, SelectMenuInteraction } from "discord.js";
-import ensureDependencies from "./Util/ensureDependencies";
-
-export {};
-declare global {
-	interface String {
-		withPlaceholders(placeholders: any): string;
-	}
-	namespace Express {
-		interface Request {
-			user?: any;
-		}
-	}
-}
-
-// @ts-ignore
-String.prototype.withPlaceholders = function (placeholders = {}) {
-	let str = this;
-	for (let key in placeholders) str = str.replace(new RegExp(`\{${key}\}`, "gi"), placeholders[key]);
-	return str;
-};
+import * as yaml from "js-yaml";
+import * as fs from "fs";
+import configSchema from "./Const/configValidator";
+import Client from "./Classes/Client";
+import Logger from "./Classes/Logger";
 
 export type ComponentInteraction = ButtonInteraction | SelectMenuInteraction | ModalSubmitInteraction;
 
 let client;
-const init = async () => {
-	try {
-		await ensureDependencies();
-	} catch (err) {
-		console.log('[ERROR] Dependencies failed to install automatically. Please install them manually by running "npm install".');
+
+const validateConfig = (config: any) => {
+	const configValidation = configSchema.safeParse(config);
+	if (!configValidation.success) {
+		const err = configValidation["error"];
+		Logger.error(
+			"Validation of config.yml failed.\nPlease resolve the following errors before running the bot:\n",
+			err.issues.map((issue) => `- ${issue.path.join(".")}: ${issue.message} (${issue.code})`).join("\n")
+		);
 		process.exit(1);
 	}
+	return configValidation.data;
+};
 
-	const { default: Client }: any = await import("./Classes/Client");
-	const { default: Logger }: any = await import("./Classes/Logger");
-	const { default: ensureNodeVersion }: any = await import("./Util/ensureNodeVersion");
-	const { default: loadYamlFiles }: any = await import("./Util/loadYamlFiles");
-	const {
-		default: { validateConfig, validateLang },
-	}: any = await import("./Util/validateConfigs");
-
+const init = async () => {
 	Logger.startup("Starting the bot...");
 
-	ensureNodeVersion();
-	const [unvalidatedConfig, unvalidatedLang] = loadYamlFiles();
-	const config = validateConfig(unvalidatedConfig);
-	const lang = validateLang(unvalidatedLang);
+	const configData = fs.readFileSync("./config.yml", "utf8");
+	const parsedYaml = yaml.load(configData);
+	const config = validateConfig(parsedYaml);
 
-	client = new Client(config, lang);
+	client = new Client(config);
 };
 init();
