@@ -12,7 +12,9 @@ const configSchema = z.object({
 	log_channel_id: z.string().optional(),
 	embed_content: z.object({
 		title: z.string(),
-		color: z.string().refine((color) => !isNaN(parseInt(color, 16)), { message: "The color property is not a valid hex color. It cannot contain a #." }),
+		color: z
+			.string()
+			.refine((color) => !isNaN(parseInt(color, 16)), { message: "The color property is not a valid hex color. It cannot contain a #." }),
 		thumbnail: z
 			.object({
 				enabled: z.boolean(),
@@ -22,7 +24,7 @@ const configSchema = z.object({
 				enabled: false,
 			}),
 	}),
-	questions: z.array(question).max(10).default([]),
+	questions: z.array(question).min(1).max(25).default([]),
 });
 
 export default configSchema;

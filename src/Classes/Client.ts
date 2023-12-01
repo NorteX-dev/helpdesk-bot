@@ -1,16 +1,18 @@
-import { Client as DJSClient, GatewayIntentBits, Partials } from "discord.js";
-import { CommandHandler, ComponentHandler, EventHandler } from "@nortex/handler";
-import Logger from "./Logger";
 import * as path from "path";
+import { Client as DJSClient, GatewayIntentBits, Partials } from "discord.js";
+import { CommandHandler, ComponentHandler, createCommands, createComponents, createEvents, EventHandler } from "nhandler";
+
 import { Config } from "../Const/configValidator";
+import Logger from "./Logger";
 
 export let CLIENT_INSTANCE: Client | undefined;
 
 export default class Client extends DJSClient {
 	config: Config;
 	initDate: number;
-	commandHandler!: CommandHandler;
-	componentHandler!: ComponentHandler;
+	public static commandHandler: CommandHandler;
+	public static componentHandler: ComponentHandler;
+	public static eventHandler: EventHandler;
 
 	constructor(config: Config) {
 		super({
@@ -28,9 +30,9 @@ export default class Client extends DJSClient {
 	}
 
 	createHandlers() {
-		this.commandHandler = this.createInteractionHandler();
-		this.componentHandler = this.createComponentHandler();
-		this.createEventHandler();
+		Client.commandHandler = this.createCommandHandler();
+		Client.componentHandler = this.createComponentHandler();
+		Client.eventHandler = this.createEventHandler();
 	}
 
 	async run() {
@@ -41,30 +43,18 @@ export default class Client extends DJSClient {
 		}
 	}
 
-	createInteractionHandler() {
-		const handler = new CommandHandler({
-			client: this,
-			directory: path.join(__dirname, "../Commands"),
-		});
-		handler.on("load", (int) => Logger.startup(`Slash command loaded: ${int.name}`));
-		return handler;
+	createCommandHandler() {
+		Logger.startup("Loading commands...");
+		return createCommands<Client>({ client: this }).registerFromDir(path.join(__dirname, "../Commands"));
 	}
 
 	createEventHandler() {
-		const handler = new EventHandler({
-			client: this,
-			directory: path.join(__dirname, "../Events"),
-		});
-		handler.on("load", (evt) => Logger.startup(`Event loaded: ${evt.name}`));
-		return handler;
+		Logger.startup("Loading events...");
+		return createEvents({ client: this }).registerFromDir(path.join(__dirname, "../Events"));
 	}
 
 	createComponentHandler() {
-		const handler = new ComponentHandler({
-			client: this,
-			directory: path.join(__dirname, "../Components"),
-		});
-		handler.on("load", (cmp) => Logger.startup(`Component loaded: ${cmp.customId}`));
-		return handler;
+		Logger.startup("Loading components...");
+		return createComponents({ client: this }).registerFromDir(path.join(__dirname, "../Components"));
 	}
 }

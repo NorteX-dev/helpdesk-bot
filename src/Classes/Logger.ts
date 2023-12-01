@@ -1,28 +1,23 @@
-import * as chalk from "chalk";
-import * as moment from "moment";
+import c from "ansi-colors";
 
 export default class Logger {
 	static getDate() {
-		return `${chalk.gray("[" + moment().format("DD MMM HH:mm:ss") + "]")}`;
+		return `${c.gray(`[${new Date().toISOString()}]`)}`;
 	}
 
 	static startup(...message: any) {
-		console.log(`${Logger.getDate()} ${chalk.bold.green("STARTUP")} ${" ".repeat(2)}`, ...message);
+		console.log(`${Logger.getDate()} ${c.bold.green("STARTUP")} ${" ".repeat(2)}`, ...message);
 	}
 
 	static log(...message: any) {
-		console.log(`${Logger.getDate()} ${chalk.bold.white("LOG")}  ${" ".repeat(5)}`, ...message);
+		console.log(`${Logger.getDate()} ${c.bold.white("LOG")}  ${" ".repeat(5)}`, ...message);
 	}
 
 	static info(...message: any) {
-		console.log(`${Logger.getDate()} ${chalk.bold.blueBright("INFO")} ${" ".repeat(5)}`, ...message);
-	}
-
-	static warn(...message: any) {
-		console.log(`${Logger.getDate()} ${chalk.bold.yellowBright("WARN")} ${" ".repeat(5)}`, ...message);
+		console.log(`${Logger.getDate()} ${c.bold.blueBright("INFO")} ${" ".repeat(5)}`, ...message);
 	}
 
 	static error(...message: any) {
-		console.log(`${Logger.getDate()} ${chalk.bold.red("ERROR")}${" ".repeat(5)}`, ...message);
+		console.log(`${Logger.getDate()} ${c.bold.red("ERROR")}${" ".repeat(5)}`, ...message);
 	}
 }

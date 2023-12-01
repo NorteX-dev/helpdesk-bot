@@ -8,7 +8,7 @@
 
 # This is the token for your discord bot. It is required.
 # You can get it from the Discord Developer Portal @ https://discord.com/developers/applications/.
-token: "ODYyNDExODMxMTMzOTk1MDI5.GfQDyc.Gw6AEjhCOfHtgXhZ1Md19FvceI8O126Hrservk"
+token: "ODYyNDExODMxMTMzOTk1MDI5.Gel3Oa.gyFpQiQb__4rqcT3fyhXgRSROHmIS6LvkxyNFI"
 # This is the text for the bot's status. You can leave this empty ("") or remove this key in its entirety if you do not want status.
 status: ""
 # This is a list of the IDs of the users who can use the bot.
@@ -23,7 +23,7 @@ log_channel_id: "923189263569403925"
 embed_content:
   # The title of the embed.
   title: "Support Embed Title"
-  # The hex code for your embed color.
+  # The hex code for your embed color. Exclude the # symbol.
   color: "00FF00"
   thumbnail:
     # Toggles whether or not the thumbnail is enabled.
@@ -32,7 +32,7 @@ embed_content:
     url: "https://cdn.discordapp.com/attachments/810594298021543965/810594298021543965/810594298021543965.png"
 
 # A list of questions visible in the helpdesk embed along with their respective responses.
-# You can add up to 10.
+# You can add up to 25.
 questions:
   - question: "Question 1"
     response: "Response 1"
