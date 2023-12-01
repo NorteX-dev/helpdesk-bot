@@ -2,7 +2,7 @@ import c from "ansi-colors";
 
 export default class Logger {
 	static getDate() {
-		return `${c.gray(`[${new Date().toISOString()}]`)}`;
+		return `${c.gray(`[${new Date().toLocaleDateString()}]`)}`;
 	}
 
 	static startup(...message: any) {

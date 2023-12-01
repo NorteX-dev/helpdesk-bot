@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { EmbedBuilder, TextChannel } from "discord.js";
 import { AnyComponentInteraction, ComponentError } from "nhandler";
 
@@ -21,7 +22,7 @@ export default class extends BaseComponent {
 			throw new ComponentError("This question doesn't have a response set up.");
 		}
 		this.respond(interaction, question);
-		this.log(interaction);
+		this.log(interaction, idx);
 	}
 
 	private respond(interaction: AnyComponentInteraction, question: ConfigQuestion) {
@@ -37,12 +38,12 @@ export default class extends BaseComponent {
 		interaction.reply({ embeds: [embed], ephemeral: true });
 	}
 
-	private log(interaction: AnyComponentInteraction) {
+	private log(interaction: AnyComponentInteraction, idx: number) {
 		if (!this.client.config.log_channel_id) return;
 		const channel = this.client.channels.cache.get(this.client.config.log_channel_id);
 		if (!channel || !(channel instanceof TextChannel)) return;
 		channel.send({
-			content: `**${interaction.user.tag}** (${interaction.user.id}) used \`${interaction.customId}\`\nTimestamp: ${new Date().toISOString()}`,
+			content: `**${interaction.user.tag}** (\`${interaction.user.id}\`) used button ${idx + 1} at ${dayjs().format("YYYY-MM-DD HH:mm:ss")}`,
 		});
 	}
 }

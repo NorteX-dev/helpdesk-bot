@@ -8,31 +8,30 @@
 
 # This is the token for your discord bot. It is required.
 # You can get it from the Discord Developer Portal @ https://discord.com/developers/applications/.
-token: "ODYyNDExODMxMTMzOTk1MDI5.Gel3Oa.gyFpQiQb__4rqcT3fyhXgRSROHmIS6LvkxyNFI"
+token: "YOUR TOKEN HERE"
 # This is the text for the bot's status. You can leave this empty ("") or remove this key in its entirety if you do not want status.
 status: ""
 # This is a list of the IDs of the users who can use the bot.
 # You can get a your/any user's ID by enabling developer mode in Discord and right clicking on your/their name.
 owners:
-  - "810594298021543965"
-  - "180280668239036416"
+  - "YOUR USER ID"
 # The ID of the channel where button press logs will be sent.
 # Optional - leave empty ("") to disable.
-log_channel_id: "923189263569403925"
+log_channel_id: ""
 # Configuration for the embed generated upon running /create.
 embed_content:
   # The title of the embed.
   title: "Support Embed Title"
-  # The hex code for your embed color. Exclude the # symbol.
-  color: "00FF00"
+  # The hex code for your embed color.
+  color: "50ff38"
   thumbnail:
     # Toggles whether or not the thumbnail is enabled.
-    enabled: true
+    enabled: false
     # The URL of the thumbnail. Required if `enabled` parameter is true.
-    url: "https://cdn.discordapp.com/attachments/810594298021543965/810594298021543965/810594298021543965.png"
+    url: ""
 
 # A list of questions visible in the helpdesk embed along with their respective responses.
-# You can add up to 25.
+# You can add up to 10.
 questions:
   - question: "Question 1"
     response: "Response 1"

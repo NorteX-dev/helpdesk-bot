@@ -19,7 +19,7 @@ export default class implements Event {
 			});
 		}
 
-		Logger.startup("Updating application commands...");
 		Client.commandHandler.updateApplicationCommands();
+		Logger.startup("Updated application commands.");
 	}
 }
