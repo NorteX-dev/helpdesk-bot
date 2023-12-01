@@ -1,0 +1,60 @@
+##########################################################
+# This is the configuration file for the helpdesk bot.
+# Any lines starting with a # are comments and will be ignored.
+# Above each key is a description of what that property does,
+#   so make sure you read it if you don't know.
+# Thank you for your purchase.
+##########################################################
+
+# This is the token for your discord bot. It is required.
+# You can get it from the Discord Developer Portal @ https://discord.com/developers/applications/.
+token: "MTA3NjkyODAzMzkyNTEyNDExMA.GB37ll.R2vqsWqgjxN5sIrDtdLhvxac6nrfQvXHi9BXHc"
+# This is the text for the bot's status. You can leave this empty ("") or remove this key in its entirety if you do not want status.
+status: ""
+# This is a list of the IDs of the users who can use the bot.
+# You can get a your/any user's ID by enabling developer mode in Discord and right clicking on your/their name.
+owners:
+  - "810594298021543965"
+  - "180280668239036416"
+# The ID of the channel where button press logs will be sent.
+# Optional - leave empty ("") to disable.
+log_channel_id: "894604565956165694"
+# Configuration for the embed generated upon running /create.
+embed_content:
+  # The title of the embed.
+  title: "FAQ: Setting up & running the Light Services bot"
+  # The hex code for your embed color.
+  color: "cb3236"
+  thumbnail:
+    # Toggles whether or not the thumbnail is enabled.
+    enabled: false
+
+# A list of questions visible in the helpdesk embed along with their respective responses.
+# You can add up to 10.
+questions:
+  - question: "Error: no such file or directory, open 'config.yml'"
+    response: "This error means that you don't have a `config.yml` file. You have to copy over the `config.example.yml` file and rename it to `config.yml` and then fill in the values according to your preference."
+
+  - question: "Configuration: what is the token?"
+    response: "The token is required for the bot to run. It allows Discord to identify your bot.\To get a token, go to [Discord Developer Portal](https://discord.com/developers/applications) and create a new application. Afterwards, go to the `Bot` tab and click `Add Bot`. You can then copy the token and paste it into the `config.yml` file."
+
+  - question: "Configuration: what is `dbUrl`?"
+    response: "The `dbUrl` is the URL to a SQL-based database. The database URL looks like: `protocol://username:password@host:port/database_name` (except SQLite), where:\n- `protocol` is the database type, for example `mysql`, `postgres`, `sqlite`\n- `username` and `password` is a pair of credentials to your database\n- `host` and `port` is the address to your database, for example `database.hosting123.com:5432`\n- `database_name` is the name of the database. The chosen database must exist beforehand and will not be created by the bot.\n\n**If you have no idea about system administrating and databases, input `sqlite://database.db` to use a local SQLite database.**"
+
+  - question: "Error during creating an invoice or other PayPal error"
+    response: "First off, check your credentials and sandbox mode. PayPal (and some other gateways) have \"sandbox\" modes which basically are designed for testing.\nMake sure when getting credentials you're on the appropriate tab and set the `useSandbox` flag to false/true depending."
+
+  - question: "Do I have to make the SQL tables myself?"
+    response: "No, you don't. Tables and their fields are managed by the bot. The only thing you have to create is the database itself."
+
+  - question: "I don't see any slash commands after inviting the bot."
+    response: "Make sure you've used the `application.commands` scope along the `bot` scope when inviting the bot.\nIf that doesn't work, try setting `forceUpdateInteractions` to `true` in the `config.yml` file and restart the bot."
+
+  - question: "Error: Cannot find module 'node:events'"
+    response: "The bot requires Node.js version 16 or higher. Upgrade your version of Node to v16 or v18."
+
+  - question: "Error that looks like:\n```js\noptions.dialect = urlParts.protocol.replace(/:$/, \"\");\n\nTypeError: Cannot read properties of null (reading 'replace')```"
+    response: "The error signals a malformed database URL. Make sure you've entered the URL correctly and that the `dbUrl` is not commented out (check for a hashtag # before the word).\nFor reference on configuring the database, refer to the third question."
+
+  - question: "Any other question/issue?"
+    response: "Please create a support ticket at <#894601878246129694>."
