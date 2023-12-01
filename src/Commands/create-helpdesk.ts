@@ -36,15 +36,9 @@ export default class extends BaseCommand {
 	];
 
 	async run(interaction: ChatInputCommandInteraction): Promise<void> {
-		if (!interaction.guild) {
-			throw new CommandError("This command can only be used in a server.");
-		}
-		if (!this.client.config.owners.includes(interaction.user.id)) {
-			throw new CommandError("You are not allowed to use this command.");
-		}
-		if (!this.client.config.questions.length) {
-			throw new CommandError("There aren't any questions set up in the bot config.");
-		}
+		if (!interaction.guild) throw new CommandError("This command can only be used in a server.");
+		if (!this.client.config.owners.includes(interaction.user.id)) throw new CommandError("You are not allowed to use this command.");
+		if (!this.client.config.questions.length) throw new CommandError("There aren't any questions set up in the bot config.");
 
 		const desc = this.client.config.questions
 			.map(({ question }: { question: string }, idx: number) => {

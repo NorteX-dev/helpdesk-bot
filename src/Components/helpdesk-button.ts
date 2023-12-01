@@ -9,9 +9,7 @@ export default class extends BaseComponent {
 	customId = "helpdesk";
 
 	async run(interaction: AnyComponentInteraction): Promise<void> {
-		if (!interaction.guild) {
-			throw new ComponentError("This button can only be used in a server.");
-		}
+		if (!interaction.guild) throw new ComponentError("This button can only be used in a server.");
 
 		const idx = parseInt(interaction.customId.split("-")[1]);
 		const question = this.client.config.questions[idx];
