@@ -14,4 +14,4 @@ However, it is **strictly prohibited to sell** the code of this project, under a
 
 Copyright law applies. Original author accreditation is required when using and/or modifying.
 
-Any found in violation of copyright will be reported and their products/projects/repos taken down.
+Any found in violation of copyright will be reported and their products/projects/repos will be taken down.
