@@ -2,7 +2,13 @@ import { z } from "zod";
 
 const question = z.object({
 	question: z.string(),
-	response: z.string(),
+	response: z.object({
+		title: z.string(),
+		color: z.string().optional(),
+		description: z.string(),
+		image: z.object({ enabled: z.boolean(), url: z.string().optional() }).default({ enabled: false }),
+		thumbnail: z.object({ enabled: z.boolean(), url: z.string().optional() }).default({ enabled: false }),
+	}),
 });
 
 const configSchema = z.object({
@@ -15,14 +21,8 @@ const configSchema = z.object({
 		color: z
 			.string()
 			.refine((color) => !isNaN(parseInt(color, 16)), { message: "The color property is not a valid hex color. It cannot contain a #." }),
-		thumbnail: z
-			.object({
-				enabled: z.boolean(),
-				url: z.string().optional(),
-			})
-			.default({
-				enabled: false,
-			}),
+		image: z.object({ enabled: z.boolean(), url: z.string().optional() }).default({ enabled: false }),
+		thumbnail: z.object({ enabled: z.boolean(), url: z.string().optional() }).default({ enabled: false }),
 	}),
 	questions: z.array(question).min(1).max(25).default([]),
 });

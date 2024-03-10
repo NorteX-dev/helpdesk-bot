@@ -53,9 +53,10 @@ export default class extends BaseCommand {
 		});
 		embed.setTimestamp();
 		embed.setColor(parseInt(this.client.config.embed_content.color, 16));
-		if (this.client.config.embed_content.thumbnail.enabled && this.client.config.embed_content.thumbnail.url) {
+		if (this.client.config.embed_content.thumbnail.enabled && this.client.config.embed_content.thumbnail.url)
 			embed.setThumbnail(this.client.config.embed_content.thumbnail.url);
-		}
+		if (this.client.config.embed_content.image.enabled && this.client.config.embed_content.image.url)
+			embed.setImage(this.client.config.embed_content.image.url);
 		embed.setDescription(desc);
 		embed.setFooter({ text: interaction.guild.name });
 

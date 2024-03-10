@@ -1,6 +1,6 @@
 {
 	"name": "helpdesk",
-	"version": "2.3.1",
+	"version": "2.4.0",
 	"description": "A bot for setting up a helpdesk in your server.",
 	"main": "src/index.ts",
 	"scripts": {

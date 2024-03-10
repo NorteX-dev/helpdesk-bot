@@ -30,9 +30,11 @@ export default class extends BaseComponent {
 			iconURL: this.client.user!.displayAvatarURL({ size: 256 }),
 		});
 		embed.setTimestamp();
-		embed.setColor(parseInt(this.client.config.embed_content.color, 16));
+		embed.setColor(parseInt(question.response.color || this.client.config.embed_content.color, 16));
 		embed.setFooter({ text: interaction.guild!.name });
-		embed.setDescription(question.response);
+		if (question.response.description) embed.setDescription(question.response.description);
+		if (question.response.image.enabled && question.response.image.url) embed.setImage(question.response.image.url);
+		if (question.response.thumbnail.enabled && question.response.thumbnail.url) embed.setThumbnail(question.response.thumbnail.url);
 		interaction.reply({ embeds: [embed], ephemeral: true });
 	}
 
